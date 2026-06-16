@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 
-const lightThemePages = ["/products", "/why-orbit"];
+const lightThemePages = ["/products", "/why-orbit", "/about"];
 
 export default function Navbar() {
   const pathname = usePathname();

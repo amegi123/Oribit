@@ -12,8 +12,9 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="bg-orbit-50">
       <PageHero
+        theme="light"
         badge="About Us"
         title="Ethiopia's Trusted Orbit Partner"
         subtitle="More than 15 years in the electronics industry, dedicated to delivering high-quality home appliances and exceptional service across Ethiopia."
@@ -21,7 +22,7 @@ export default function AboutPage() {
       />
       <About showHeader={false} />
       <VisionMission />
-      <CTABanner />
+      <CTABanner variant="light" />
     </main>
   );
 }

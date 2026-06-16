@@ -69,7 +69,17 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-orbit-700/60 pt-8 sm:flex-row">
           <p className="text-sm text-orbit-100/50">{siteConfig.copyright}</p>
-          <p className="text-sm text-orbit-100/50">Quality electronics for a better life.</p>
+          <p className="text-sm text-orbit-100/50">
+            Developed by{" "}
+            <a
+              href="https://halink.et"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-orbit-200 transition-colors hover:text-white"
+            >
+              Halink
+            </a>
+          </p>
         </div>
       </div>
     </footer>
