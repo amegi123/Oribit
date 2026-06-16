@@ -44,6 +44,14 @@
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20;
   }
+
+  .nav-glass {
+    @apply border-b border-white/15 bg-orbit-900/45 shadow-[0_8px_32px_rgba(0,39,80,0.18)] backdrop-blur-2xl backdrop-saturate-150;
+  }
+
+  .nav-glass-light {
+    @apply border-b border-orbit-200/60 bg-white/55 shadow-[0_8px_32px_rgba(0,119,200,0.08)] backdrop-blur-2xl backdrop-saturate-150;
+  }
 }
 
 @layer utilities {

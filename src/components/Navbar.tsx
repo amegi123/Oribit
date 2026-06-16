@@ -8,9 +8,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/data";
 
+const lightThemePages = ["/products", "/why-orbit"];
+
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isLightPage = lightThemePages.includes(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -25,13 +28,16 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const solid = !isHome || scrolled;
+  const showGlass = !isHome || scrolled;
+  const useLightGlass = isLightPage && showGlass;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        solid
-          ? "border-b border-orbit-800/50 bg-orbit-900/95 shadow-lg shadow-orbit-900/20 backdrop-blur-xl"
+        showGlass
+          ? useLightGlass
+            ? "nav-glass-light"
+            : "nav-glass"
           : "bg-transparent"
       }`}
     >
@@ -55,16 +61,22 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    active
-                      ? "text-white"
-                      : "text-white/70 hover:text-white"
+                    useLightGlass
+                      ? active
+                        ? "text-orbit-700"
+                        : "text-orbit-800/70 hover:text-orbit-900"
+                      : active
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.label}
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-orbit-500/30"
+                      className={`absolute inset-0 -z-10 rounded-full ${
+                        useLightGlass ? "bg-orbit-500/15" : "bg-orbit-500/30"
+                      }`}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -80,7 +92,9 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="rounded-lg p-2 text-white md:hidden"
+          className={`rounded-lg p-2 md:hidden ${
+            useLightGlass ? "text-orbit-800" : "text-white"
+          }`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -94,7 +108,11 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-white/10 bg-orbit-900/98 backdrop-blur-xl md:hidden"
+            className={`overflow-hidden border-t backdrop-blur-2xl md:hidden ${
+              useLightGlass
+                ? "nav-glass-light border-orbit-200/60"
+                : "nav-glass border-white/10"
+            }`}
           >
             <div className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => {
@@ -104,7 +122,13 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     className={`rounded-xl px-4 py-3 text-lg font-medium ${
-                      active ? "bg-orbit-500/20 text-white" : "text-white/85"
+                      useLightGlass
+                        ? active
+                          ? "bg-orbit-500/15 text-orbit-800"
+                          : "text-orbit-800/85"
+                        : active
+                          ? "bg-orbit-500/20 text-white"
+                          : "text-white/85"
                     }`}
                   >
                     {link.label}

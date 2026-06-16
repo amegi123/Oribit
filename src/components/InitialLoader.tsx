@@ -11,12 +11,12 @@ export default function InitialLoader() {
     const hide = () => setShow(false);
 
     if (document.readyState === "complete") {
-      const timer = window.setTimeout(hide, 600);
+      const timer = window.setTimeout(hide, 500);
       return () => window.clearTimeout(timer);
     }
 
     window.addEventListener("load", hide);
-    const fallback = window.setTimeout(hide, 2500);
+    const fallback = window.setTimeout(hide, 2200);
 
     return () => {
       window.removeEventListener("load", hide);
@@ -31,10 +31,10 @@ export default function InitialLoader() {
           key="initial-loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeInOut" }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-orbit-900"
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="fixed inset-0 z-[200]"
         >
-          <LoadingScreen variant="dark" compact />
+          <LoadingScreen fullscreen />
         </motion.div>
       )}
     </AnimatePresence>
